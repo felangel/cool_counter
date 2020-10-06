@@ -69,8 +69,6 @@ blocTest(
 
 ---
 
-`
-
 # WeatherCubit
 
 ```dart
@@ -113,7 +111,7 @@ class WeatherCubit extends Cubit<WeatherState> {
 }
 ```
 
----`
+---
 
 # Let's take it from the top (of the widget tree)
 
@@ -173,8 +171,6 @@ class WeatherApp extends StatelessWidget {
 
 ---
 
-`
-
 # Providing the Cubit
 
 ```dart
@@ -218,7 +214,7 @@ class HomeView extends StatelessWidget {
 }
 ```
 
----`
+---
 
 # Setting Up & Tearing Down
 
