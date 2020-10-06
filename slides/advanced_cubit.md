@@ -17,17 +17,19 @@ slidenumbers: true
 
 # Agenda
 
-- Testing & Dependency Injection: Deep Dive
-- Caching: Walk-Through
-- Undo/Redo: Walk-Through
+- 🧪 Testing with BlocTest
+- 🚰 Caching with HydratedBloc
+- ⏳ Undo/Redo with ReplayBloc
 
 ---
 
-# Testing
+# Testing with BlocTest
+
+![inline](bloc_test.png)
 
 ---
 
-# Testing Goals
+# Testing Goals 🧪
 
 [.code-highlight: all]
 [.code-highlight: 3]
@@ -522,4 +524,94 @@ https://youtu.be/cVru6Gy4duQ
 
 ---
 
-# Caching with HydratedCubit
+# Caching with HydratedBloc
+
+![inline](hydrated_bloc.png)
+
+---
+
+# How to Hydrate? 🚰
+
+[.column]
+
+```dart
+class CounterCubit extends Cubit<int> {
+  CounterCubit() : super(0);
+
+  void increment() => emit(state + 1);
+}
+```
+
+[.column]
+
+```dart
+class CounterCubit extends HydratedCubit<int> {
+  CounterCubit() : super(0);
+
+  void increment() => emit(state + 1);
+
+  @override
+  int fromJson(Map<String, dynamic> json) {
+    return json['counter'] as int;
+  }
+
+  @override
+  Map<String, dynamic> toJson(int state) {
+    return {'counter': state};
+  }
+}
+```
+
+---
+
+# Undo/Redo with ReplayBloc
+
+![inline](replay_bloc.png)
+
+---
+
+# How to Replay? ⏳
+
+[.column]
+
+```dart
+class CounterCubit extends Cubit<int> {
+  CounterCubit() : super(0);
+
+  void increment() => emit(state + 1);
+}
+```
+
+[.column]
+
+```dart
+class CounterCubit extends ReplayCubit<int> {
+  CounterCubit() : super(0);
+
+  void increment() => emit(state + 1);
+}
+```
+
+---
+
+# 👩‍💻👨‍💻
+
+# Demo Time
+
+## https://github.com/felangel/cool_counter
+
+---
+
+![inline 15%](./bloc_logo.png)
+
+# Additional Resources
+
+## https://bloclibrary.dev
+
+## https://discord.gg/Hc5KD3g
+
+---
+
+# 🙏 💙
+
+# Thank You!
