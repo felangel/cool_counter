@@ -31,19 +31,19 @@ class CounterPage extends StatelessWidget {
         actions: [
           BlocBuilder<CounterCubit, int>(
             builder: (context, state) {
-              final bloc = context.bloc<CounterCubit>();
+              final cubit = context.bloc<CounterCubit>();
               return IconButton(
                 icon: const Icon(Icons.undo),
-                onPressed: bloc.canUndo ? bloc.undo : null,
+                onPressed: cubit.canUndo ? cubit.undo : null,
               );
             },
           ),
           BlocBuilder<CounterCubit, int>(
             builder: (context, state) {
-              final bloc = context.bloc<CounterCubit>();
+              final cubit = context.bloc<CounterCubit>();
               return IconButton(
                 icon: const Icon(Icons.redo),
-                onPressed: bloc.canRedo ? bloc.redo : null,
+                onPressed: cubit.canRedo ? cubit.redo : null,
               );
             },
           ),
