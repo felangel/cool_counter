@@ -1,7 +1,7 @@
 footer: @felangelov - Flutter Warsaw Meetup 2020
 slidenumbers: true
 
-# Cubit: Advanced Topics
+# Cubit: Advanced Topics 🚀
 
 ### Felix Angelov @ Very Good Ventures
 
@@ -31,21 +31,15 @@ slidenumbers: true
 
 # Testing Goals 🧪
 
-[.code-highlight: all]
-[.code-highlight: 3]
-[.code-highlight: 4]
-[.code-highlight: 5-10]
-
 ```dart
 blocTest(
   'emits correct weather',
   build: () => WeatherCubit(),
   act: (cubit) => cubit.fetchWeather(city: 'Warsaw'),
   expect: [
-    WeatherState(status: WeatherStatus.loading),
-    WeatherState(
-      status: WeatherStatus.success,
-      weather: Weather(
+    WeatherState.loading(),
+    WeatherState.success(
+      Weather(
         temperature: 10.3,
         condition: WeatherCondition.cloudy,
       ),
@@ -75,8 +69,7 @@ blocTest(
 
 ---
 
-[.code-highlight: all]
-[.code-highlight: 7]
+`
 
 # WeatherCubit
 
@@ -120,11 +113,7 @@ class WeatherCubit extends Cubit<WeatherState> {
 }
 ```
 
----
-
-[.code-highlight: all]
-[.code-highlight: 2]
-[.code-highlight: 4-6]
+---`
 
 # Let's take it from the top (of the widget tree)
 
@@ -184,9 +173,7 @@ class WeatherApp extends StatelessWidget {
 
 ---
 
-[.code-highlight: all]
-[.code-highlight: 4-9]
-[.code-highlight: 5-7]
+`
 
 # Providing the Cubit
 
@@ -231,12 +218,7 @@ class HomeView extends StatelessWidget {
 }
 ```
 
----
-
-[.code-highlight: all]
-[.code-highlight: 1]
-[.code-highlight: 7-10]
-[.code-highlight: 12-14]
+---`
 
 # Setting Up & Tearing Down
 
@@ -290,11 +272,8 @@ blocTest(
   build: ...
   act: (cubit) => cubit.fetchWeather(city: 'Warsaw'),
   expect: [
-    WeatherState(status: WeatherStatus.loading),
-    WeatherState(
-      status: WeatherStatus.success,
-      weather: warsawWeather,
-    ),
+    WeatherState.loading(),
+    WeatherState.success(warsawWeather),
   ],
 );
 ```
@@ -319,18 +298,18 @@ blocTest(
 # Rainy Day 🌧️
 
 ```dart
-const weatherException = WeatherException(...);
+const weatherException = Exception('weather-exception');
 
 blocTest(
-  'emits weather when repository returns successfully',
+  'emits failure when repository throws',
   build: () {
     when(weatherRepository.getWeather(any)).thenThrow(weatherException);
     return weatherCubit;
   },
   act: (cubit) => cubit.fetchWeather(city: 'Warsaw'),
   expect: [
-    WeatherState(status: WeatherStatus.loading),
-    WeatherState(status: WeatherStatus.failure),
+    WeatherState.loading(),
+    WeatherState.failure(),
   ]
 );
 ```
